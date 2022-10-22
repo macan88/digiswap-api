@@ -1,7 +1,7 @@
 import { CacheModule, HttpModule } from '@nestjs/common';
 import { MongooseModule } from '@nestjs/mongoose';
 import { Test, TestingModule } from '@nestjs/testing';
-import { gBananaTreasury } from 'src/stats/utils/stats.utils';
+import { gDigichainTreasury } from 'src/stats/utils/stats.utils';
 import { closeInMongodConnection, rootMongooseTestModule } from 'src/utils/testing';
 import { BitqueryService } from './bitquery.service';
 import { CandleOptionsDto } from './dto/candle.dto';
@@ -67,20 +67,20 @@ describe('Bitquery Service', () => {
   });
 
   it('should be get token bsc info', async () => {
-    const address = '0x603c7f932ed1fc6575303d8fb018fdcbb0f39a95';
+    const address = '0x4732A86106064577933552FCea993D30BEC950a5';
     const network = 'bsc';
     const info = await service.getTokenInformation(address, network);
     expect(info).toEqual(expect.objectContaining(tokenInformation));
   });
 
   it('should be get gdigi info', async () => {
-    const gnanaInfo = {
+    const gdigiInfo = {
       circulatingSupply: expect.any(String),
       reserve: expect.any(String),
       supply: expect.any(String),
     };
-    const info = await service.getTreasuryGnana(gBananaTreasury());
-    expect(info).toEqual(expect.objectContaining(gnanaInfo));
+    const info = await service.getTreasuryGdigi(gDigichainTreasury());
+    expect(info).toEqual(expect.objectContaining(gdigiInfo));
   });
 
   it('should be get token matic info', async () => {
@@ -103,7 +103,7 @@ describe('Bitquery Service', () => {
       open_price: expect.any(String),
       close_price: expect.any(String),
     };
-    const address = '0x603c7f932ed1fc6575303d8fb018fdcbb0f39a95';
+    const address = '0x4732A86106064577933552FCea993D30BEC950a5';
     const options: CandleOptionsDto = {
       from: '2022-01-30',
       to: '2022-01-30',

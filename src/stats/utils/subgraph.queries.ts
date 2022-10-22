@@ -84,7 +84,7 @@ export function dayData({ first, skip, startTimestamp, endTimestamp, order = 'de
   const dateGt = startTimestamp ? `date_gt: ${startTimestamp},` : '';
   const dateLt = endTimestamp ? `date_lt: ${endTimestamp}` : '';
   return `{
-    apeswapDayDatas: uniswapDayDatas(${limit} where: { ${dateGt} ${dateLt} }, orderBy: date, orderDirection: ${order}) {
+    digidexDayDatas: uniswapDayDatas(${limit} where: { ${dateGt} ${dateLt} }, orderBy: date, orderDirection: ${order}) {
       ${filter}
     }
   }`;

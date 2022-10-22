@@ -66,14 +66,14 @@ const MockMetadata: BillMetadata = {
     pairName: '[DIGICHAIN]-[WBNB] LP',
     payoutTokenData: {
       address: '0x603c7f932ED1fc6575303D8Fb018fDCBb0f39a95',
-      name: 'ApeSwapFinance Digichain',
+      name: 'DigiDexFinance Digichain',
       symbol: 'DIGICHAIN',
       decimals: 18,
     },
     token0: {
       address: '0x603c7f932ED1fc6575303D8Fb018fDCBb0f39a95',
       symbol: 'FLOKI',
-      name: 'ApeSwapFinance Digichain',
+      name: 'DigiDexFinance Digichain',
       decimals: 18,
     },
     token1: {

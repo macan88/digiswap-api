@@ -1,4 +1,4 @@
-import { DIGI_PRICE_GETTER } from 'src/stats/utils/abi/apePriceGetter';
+import { DIGI_PRICE_GETTER } from 'src/stats/utils/abi/digiPriceGetter';
 import { ERC20_ABI } from 'src/stats/utils/abi/erc20Abi';
 import { LP_ABI } from 'src/stats/utils/abi/lpAbi';
 import { multicall } from 'src/utils/lib/multicall';
@@ -7,7 +7,7 @@ import { getBalanceNumber } from 'src/utils/math';
 export async function getLpInfo(
   tokenAddress,
   payoutTokenAddress,
-  apePriceGetterAddress,
+  digiPriceGetterAddress,
   blockNumber,
   chainId: number = 137,
 ) {
@@ -98,7 +98,7 @@ export async function getLpInfo(
       DIGI_PRICE_GETTER,
       [
         {
-          address: apePriceGetterAddress,
+          address: digiPriceGetterAddress,
           name: 'getLPPrice',
           params: [tokenAddress, decimals[0]],
         },

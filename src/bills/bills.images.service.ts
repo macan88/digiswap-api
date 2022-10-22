@@ -40,7 +40,7 @@ export class BillsImagesService {
       this.logger.log(`Generating bill ${billMetadata.name}`);
       const buffer = await this.createBillImageWithMetadata(billMetadata, chainId);
       const pin = await pinFileToIPFS(process.env.PINATA_KEY, process.env.PINATA_SECRET, billMetadata.name, buffer);
-      return `https://digiswap.mypinata.cloud/ipfs/${pin.data.IpfsHash}`;
+      return `https://digidex.mypinata.cloud/ipfs/${pin.data.IpfsHash}`;
     } catch (e) {
       this.logger.error('Something went wrong creating and uploading the image');
       this.logger.error(e);
@@ -190,7 +190,7 @@ export class BillsImagesService {
           `./bnw/bnw_rectangles.png`,
           `./bnw/bnw_v2.png`,
           `./bnw/bnw_ribbon.png`,
-          `./bnw/bnw_bananas.png`,
+          `./bnw/bnw_digichains.png`,
         ];
         baseLayers.push(
           `./bnw/${billMetadata.data.token0.symbol}${

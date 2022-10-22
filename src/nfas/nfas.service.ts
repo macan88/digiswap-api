@@ -64,7 +64,7 @@ export class NfasService {
         info: 'Ya hay información en la BD, limpia la BD para ingresar la nueva información',
       };
 
-    const url = 'https://digiswap-nfa-apis.herokuapp.com/nfas';
+    const url = 'https://digidex-nfa-apis.herokuapp.com/nfas';
     const { data } = await this.httpService.get(url).toPromise();
     await this.nfaModel.insertMany(data);
     return data;

@@ -66,12 +66,12 @@ export class BillsService {
     const lpData = await getLpInfo(
       principalToken,
       payoutToken,
-      this.config.get<string>(`${chainId}.apePriceGetter`),
+      this.config.get<string>(`${chainId}.digiPriceGetter`),
       transaction.blockNumber,
       chainId,
     );
 
-    const bananaAddress = this.config.get<string>(`${chainId}.contracts.digichain`);
+    const digichainAddress = this.config.get<string>(`${chainId}.contracts.digichain`);
 
     const deposit = new BigNumber(eventLog.args.deposit.toString()).div(new BigNumber(10).pow(18)).toNumber();
 
@@ -88,7 +88,7 @@ export class BillsService {
       vestingPeriodSeconds: parseInt(terms.vestingTerm),
       payoutToken: payoutToken,
       principalToken: principalToken,
-      type: payoutToken.toLowerCase() === bananaAddress.toLowerCase() ? 'Digichain' : 'Jungle',
+      type: payoutToken.toLowerCase() === digichainAddress.toLowerCase() ? 'Digichain' : 'Jungle',
       pairName: createLpPairName(lpData.token0.symbol, lpData.token1.symbol),
       payoutTokenData: lpData.payoutToken,
       token0: lpData.token0,
@@ -171,7 +171,7 @@ export class BillsService {
       return {
         billNftId: tokenId,
         tokenId: tokenId,
-        image: 'https://digiswap.finance/images/hidden-bill.png',
+        image: 'https://digidex.finance/images/hidden-bill.png',
         processing: true,
       };
     }
@@ -269,10 +269,10 @@ export class BillsService {
     const lpData = await getLpInfo(
       principalToken,
       payoutToken,
-      this.config.get<string>(`${chainId}.apePriceGetter`),
+      this.config.get<string>(`${chainId}.digiPriceGetter`),
       undefined,
     );
-    const bananaAddress = this.config.get<string>(`${chainId}.contracts.digichain`);
+    const digichainAddress = this.config.get<string>(`${chainId}.contracts.digichain`);
 
     const billData: BillData = {
       billContract,
@@ -286,7 +286,7 @@ export class BillsService {
       vestingPeriodSeconds: parseInt(terms.vestingTerm),
       payoutToken: payoutToken,
       principalToken: principalToken,
-      type: payoutToken.toLowerCase() === bananaAddress.toLowerCase() ? 'Digichain' : 'Jungle',
+      type: payoutToken.toLowerCase() === digichainAddress.toLowerCase() ? 'Digichain' : 'Jungle',
       pairName: createLpPairName(lpData.token0.symbol, lpData.token1.symbol),
       payoutTokenData: lpData.payoutToken,
       token0: lpData.token0,

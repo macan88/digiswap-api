@@ -4,7 +4,7 @@ import { getParameterCaseInsensitive, createLpPairName } from 'src/utils/helpers
 
 import { MASTER_DIGI_ABI } from './abi/masterDigiAbi';
 import configuration from 'src/config/configuration';
-import { BEP20_REWARD_DIGI_ABI } from './abi/bep20RewardApeAbi';
+import { BEP20_REWARD_DIGI_ABI } from './abi/bep20RewardDigiAbi';
 import { getBalanceNumber } from 'src/utils/math';
 import { multicallNetwork } from 'src/utils/lib/multicall';
 import { MINI_COMPLEX_REWARDER_ABI } from './abi/miniComplexRewarderAbi';
@@ -16,36 +16,36 @@ export function masterDigiContractAddress(): string {
   return configuration()[process.env.CHAIN_ID].contracts.masterDigi;
 }
 
-export function bananaAddress(): string {
+export function digichainAddress(): string {
   return configuration()[process.env.CHAIN_ID].contracts.digichain;
 }
 
-export function goldenBananaAddress(): string {
-  return configuration()[process.env.CHAIN_ID].contracts.goldenBanana;
+export function goldenDigichainAddress(): string {
+  return configuration()[process.env.CHAIN_ID].contracts.goldenDigichain;
 }
 
-export function gBananaTreasury(): string {
-  return configuration()[process.env.CHAIN_ID].contracts.gBananaTreasury;
+export function gDigichainTreasury(): string {
+  return configuration()[process.env.CHAIN_ID].contracts.gDigichainTreasury;
 }
 
 function bnbAddress(): string {
   return configuration()[process.env.CHAIN_ID].contracts.bnb;
 }
 
-function bananaBusdAddress(): string {
-  return configuration()[process.env.CHAIN_ID].contracts.bananaBusd;
+function digichainBusdAddress(): string {
+  return configuration()[process.env.CHAIN_ID].contracts.digichainBusd;
 }
 
-function bananaBnbAddress(): string {
-  return configuration()[process.env.CHAIN_ID].contracts.bananaBnb;
+function digichainBnbAddress(): string {
+  return configuration()[process.env.CHAIN_ID].contracts.digichainBnb;
 }
 
 export function burnAddress(): string {
   return configuration()[process.env.CHAIN_ID].contracts.burn;
 }
 
-export function apePriceGetter(): string {
-  return configuration()[process.env.CHAIN_ID].apePriceGetter;
+export function digiPriceGetter(): string {
+  return configuration()[process.env.CHAIN_ID].digiPriceGetter;
 }
 
 export function masterDigiContractWeb(): any {
@@ -72,19 +72,19 @@ export function olaCompoundLensContractWeb3(): any {
   return getContract(OLA_LENS_ABI, olaCompoundLensAddress());
 }
 
-export function getBananaPriceWithPoolList(poolList, prices) {
-  const poolBusd = poolList.find((pool) => pool.address === bananaBusdAddress());
-  const bananaPriceUsingBusd = poolBusd.poolToken.q1 / poolBusd.poolToken.q0;
+export function getDigichainPriceWithPoolList(poolList, prices) {
+  const poolBusd = poolList.find((pool) => pool.address === digichainBusdAddress());
+  const digichainPriceUsingBusd = poolBusd.poolToken.q1 / poolBusd.poolToken.q0;
   if (prices[bnbAddress()]) {
-    const poolBnb = poolList.find((pool) => pool.address === bananaBnbAddress());
+    const poolBnb = poolList.find((pool) => pool.address === digichainBnbAddress());
     const bnbTvl = (poolBnb.poolToken.q1 * prices[bnbAddress()].usd) / 10 ** poolBnb.poolToken.decimals;
     const busdTvl = poolBusd.poolToken.q1 / 10 ** poolBusd.poolToken.decimals;
-    const bananaPriceUsingBnb = (poolBnb.poolToken.q1 * prices[bnbAddress()].usd) / poolBnb.poolToken.q0;
+    const digichainPriceUsingBnb = (poolBnb.poolToken.q1 * prices[bnbAddress()].usd) / poolBnb.poolToken.q0;
 
-    return (bananaPriceUsingBnb * bnbTvl + bananaPriceUsingBusd * busdTvl) / (bnbTvl + busdTvl);
+    return (digichainPriceUsingBnb * bnbTvl + digichainPriceUsingBusd * busdTvl) / (bnbTvl + busdTvl);
   }
 
-  return bananaPriceUsingBusd;
+  return digichainPriceUsingBusd;
 }
 
 export function getPoolPrices(
@@ -96,23 +96,23 @@ export function getPoolPrices(
   allocPoints,
   totalAllocPoints,
   rewardsPerDay,
-  bananaAddress,
+  digichainAddress,
 ) {
   if (pool.token0 != null) {
     poolPrices.farms.push({
       ...{ poolIndex: poolIndex },
-      ...getFarmLPTokenPrices(tokens, prices, pool, allocPoints, totalAllocPoints, rewardsPerDay, bananaAddress),
+      ...getFarmLPTokenPrices(tokens, prices, pool, allocPoints, totalAllocPoints, rewardsPerDay, digichainAddress),
     });
   } else {
     poolPrices.pools.push({
       ...{ poolIndex: poolIndex },
-      ...getBep20Prices(prices, pool, allocPoints, totalAllocPoints, rewardsPerDay, bananaAddress),
+      ...getBep20Prices(prices, pool, allocPoints, totalAllocPoints, rewardsPerDay, digichainAddress),
     });
   }
 }
 
 // Given array of prices and single farm contract, return price and tvl info for farm
-function getFarmLPTokenPrices(tokens, prices, pool, allocPoints, totalAllocPoints, rewardsPerDay, bananaAddress) {
+function getFarmLPTokenPrices(tokens, prices, pool, allocPoints, totalAllocPoints, rewardsPerDay, digichainAddress) {
   const t0 = getParameterCaseInsensitive(tokens, pool.token0);
   let p0 = getParameterCaseInsensitive(prices, pool.token0)?.usd;
   const t1 = getParameterCaseInsensitive(tokens, pool.token1);
@@ -138,7 +138,7 @@ function getFarmLPTokenPrices(tokens, prices, pool, allocPoints, totalAllocPoint
 
   // APR calculations
   const poolRewardsPerDay = (allocPoints / totalAllocPoints) * rewardsPerDay;
-  const apr = ((poolRewardsPerDay * prices[bananaAddress].usd) / stakedTvl) * 365;
+  const apr = ((poolRewardsPerDay * prices[digichainAddress].usd) / stakedTvl) * 365;
   return {
     address: pool.address,
     name: createLpPairName(t0.symbol, t1.symbol),
@@ -157,21 +157,21 @@ function getFarmLPTokenPrices(tokens, prices, pool, allocPoints, totalAllocPoint
     tvl,
     stakedTvl,
     apr,
-    rewardTokenPrice: getParameterCaseInsensitive(prices, bananaAddress)?.usd,
+    rewardTokenPrice: getParameterCaseInsensitive(prices, digichainAddress)?.usd,
     rewardTokenSymbol: 'DIGICHAIN',
     decimals: pool.decimals,
   };
 }
 
 // Given array of prices and single pool contract, return price and tvl info for pool
-function getBep20Prices(prices, pool, allocPoints, totalAllocPoints, rewardsPerDay, bananaAddress) {
+function getBep20Prices(prices, pool, allocPoints, totalAllocPoints, rewardsPerDay, digichainAddress) {
   const price = getParameterCaseInsensitive(prices, pool.address)?.usd || 0;
   const tvl = (pool.totalSupply * price) / 10 ** pool.decimals;
   const stakedTvl = pool.staked * price;
 
   // APR calculations
   const poolRewardsPerDay = (allocPoints / totalAllocPoints) * rewardsPerDay;
-  const apr = ((poolRewardsPerDay * prices[bananaAddress].usd) / stakedTvl) * 365;
+  const apr = ((poolRewardsPerDay * prices[digichainAddress].usd) / stakedTvl) * 365;
 
   return {
     address: pool.address,
@@ -181,7 +181,7 @@ function getBep20Prices(prices, pool, allocPoints, totalAllocPoints, rewardsPerD
     stakedTvl,
     staked: pool.staked,
     apr,
-    rewardTokenPrice: getParameterCaseInsensitive(prices, bananaAddress)?.usd,
+    rewardTokenPrice: getParameterCaseInsensitive(prices, digichainAddress)?.usd,
     rewardTokenSymbol: 'DIGICHAIN',
     decimals: pool.decimals,
   };
@@ -480,7 +480,7 @@ export async function getAllocInfo(abiMasterDigi, miniChefAddress, dualFarmConfi
         },
         {
           address: miniChefAddress,
-          name: 'bananaPerSecond',
+          name: 'digichainPerSecond',
         },
       ],
       chainId,

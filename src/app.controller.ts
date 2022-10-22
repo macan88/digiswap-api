@@ -16,9 +16,9 @@ export class AppController {
   @Get('bab-nft/:tokenId')
   getBabMeta(@Param('tokenId') tokenId: number) {
     return {
-      name: `ApeSwap BAB Club #${tokenId}`,
-      description: 'Welcome to the ApeSwap BAB Club',
-      external_url: 'https://digiswap.finance/',
+      name: `DigiDex BAB Club #${tokenId}`,
+      description: 'Welcome to the DigiDex BAB Club',
+      external_url: 'https://digidex.finance/',
       image: 'https://ipfs.io/ipfs/QmfCoM3vEv4uAThyATKzbUAfFJ9Mn4uox5NQAT3RnXtqNB',
       animation_url: 'https://ipfs.io/ipfs/Qme2Qfn2hrvzM9pwGwm9gMakUSLshZ58WbpcE7ErvrEDaJ',
       tokenId,

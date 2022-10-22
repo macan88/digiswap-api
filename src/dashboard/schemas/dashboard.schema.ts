@@ -3,7 +3,7 @@ import { Document } from 'mongoose';
 import {
   AllHistoryTreasuryDto,
   AllHistoryTvlDto,
-  BananaDistribution,
+  DigichainDistribution,
   HistoryDto,
   LockedValueDto,
   OverviewDto,
@@ -41,7 +41,7 @@ export class Dashboard {
   protocol: ProtocolDto;
 
   @Prop()
-  distribution: BananaDistribution;
+  distribution: DigichainDistribution;
 
   @Prop()
   historyTreasury: HistoryDto;

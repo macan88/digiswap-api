@@ -93,15 +93,15 @@ export class DashboardHistoryHelperService {
   }
   async calculatePoolTvl() {
     const pools = await this.statsService.getIncentivizedPools();
-    const onlyBananaPools = pools.filter(
+    const onlyDigichainPools = pools.filter(
       (pool) => pool.stakeToken.toLowerCase() === this.config.get<string>('56.contracts.digichain'),
     );
-    const onlyGnanaPools = pools.filter(
-      (pool) => pool.stakeToken.toLowerCase() === this.config.get<string>('56.contracts.goldenBanana'),
+    const onlyGdigiPools = pools.filter(
+      (pool) => pool.stakeToken.toLowerCase() === this.config.get<string>('56.contracts.goldenDigichain'),
     );
-    const contractsBananaPool = onlyBananaPools.map((pool) => pool.address);
-    contractsBananaPool.push(this.config.get<string>('56.contracts.masterDigi'));
-    const contractsGnanaPool = onlyGnanaPools.map((pool) => pool.address);
+    const contractsDigichainPool = onlyDigichainPools.map((pool) => pool.address);
+    contractsDigichainPool.push(this.config.get<string>('56.contracts.masterDigi'));
+    const contractsGdigiPool = onlyGdigiPools.map((pool) => pool.address);
     const lastHour = 'T23:59:59';
     const now = new Date();
     const nowTime = now.getTime();
@@ -112,39 +112,39 @@ export class DashboardHistoryHelperService {
     let initTimeDate = new Date(initTime * 1000);
     let fromTime = formatDate(initTimeDate);
     let toTime = `${fromTime}${lastHour}`;
-    let amountBanana = historyPool ? historyPool.history[historyPool.history.length - 1].amountBanana : 0;
-    let amountGnana = historyPool ? historyPool.history[historyPool.history.length - 1].amountGnana : 0;
+    let amountDigichain = historyPool ? historyPool.history[historyPool.history.length - 1].amountDigichain : 0;
+    let amountGdigi = historyPool ? historyPool.history[historyPool.history.length - 1].amountGdigi : 0;
     const allInfo = {
       total: 0,
       history: historyPool ? [...historyPool.history] : [],
     };
-    const historyPriceBanana = await this.subgraphService.getTokenPriceByBlock(
+    const historyPriceDigichain = await this.subgraphService.getTokenPriceByBlock(
       this.config.get<string>('56.contracts.digichain'),
       56,
       0,
       1000,
     );
-    const promisesBalancesBanana = [];
-    const promisesBalancesGnana = [];
+    const promisesBalancesDigichain = [];
+    const promisesBalancesGdigi = [];
     const priceList = [];
     while (initTimeDate.getTime() < nowTime) {
-      promisesBalancesBanana.push(
+      promisesBalancesDigichain.push(
         this.bitqueryService.getBalancesPoolAddressByDate(
-          contractsBananaPool,
+          contractsDigichainPool,
           fromTime,
           toTime,
           this.config.get<string>('56.contracts.digichain'),
         ),
       );
-      promisesBalancesGnana.push(
+      promisesBalancesGdigi.push(
         this.bitqueryService.getBalancesPoolAddressByDate(
-          contractsGnanaPool,
+          contractsGdigiPool,
           fromTime,
           toTime,
-          this.config.get<string>('56.contracts.goldenBanana'),
+          this.config.get<string>('56.contracts.goldenDigichain'),
         ),
       );
-      const findPrice = historyPriceBanana.token.tokenDayData.find((p: any) => p.date === initTime);
+      const findPrice = historyPriceDigichain.token.tokenDayData.find((p: any) => p.date === initTime);
       const price = findPrice ? findPrice.priceUSD : 0;
       priceList.push(price);
       initTime += 86400;
@@ -152,24 +152,24 @@ export class DashboardHistoryHelperService {
       fromTime = formatDate(initTimeDate);
       toTime = `${fromTime}${lastHour}`;
     }
-    const resultBalancesBanana = await Promise.all(promisesBalancesBanana);
-    const resultBalancesGnana = await Promise.all(promisesBalancesGnana);
-    for (let index = 0; index < resultBalancesBanana.length; index++) {
-      const balancesBanana = resultBalancesBanana[index];
-      const balancesGnana = resultBalancesGnana[index];
+    const resultBalancesDigichain = await Promise.all(promisesBalancesDigichain);
+    const resultBalancesGdigi = await Promise.all(promisesBalancesGdigi);
+    for (let index = 0; index < resultBalancesDigichain.length; index++) {
+      const balancesDigichain = resultBalancesDigichain[index];
+      const balancesGdigi = resultBalancesGdigi[index];
       const price = priceList[index];
-      balancesBanana.map((balance) => {
-        amountBanana += balance.balances ? +balance.balances[0]?.value : 0;
+      balancesDigichain.map((balance) => {
+        amountDigichain += balance.balances ? +balance.balances[0]?.value : 0;
       });
-      balancesGnana.map((balance) => {
-        amountGnana += balance.balances ? +balance.balances[0]?.value : 0;
+      balancesGdigi.map((balance) => {
+        amountGdigi += balance.balances ? +balance.balances[0]?.value : 0;
       });
       allInfo.history.push({
         time: initTime,
-        amountBanana,
-        amountGnana,
+        amountDigichain,
+        amountGdigi,
         price,
-        value: price * amountBanana + price * 1.389 * amountGnana,
+        value: price * amountDigichain + price * 1.389 * amountGdigi,
       });
     }
     await this.dashboardService.createOrUpdateDashboardData({ 'tvlHistory.pools': allInfo });
@@ -380,7 +380,7 @@ export class DashboardHistoryHelperService {
                     (treasury) => treasury.lpToken.address[56].toLowerCase() === contract,
                   )?.billType;
                   const type =
-                    billType.toLowerCase() === MiscDescriptions.bananaBill
+                    billType.toLowerCase() === MiscDescriptions.digichainBill
                       ? MiscDescriptions.digiswap
                       : MiscDescriptions.partner;
                   if (type === MiscDescriptions.digiswap) {

@@ -18,7 +18,7 @@ export const DistributionDescriptions = {
 export const MiscDescriptions = {
   digiswap: 'digiswap',
   partner: 'partner',
-  bananaBill: 'digichain bill',
+  digichainBill: 'digichain bill',
 };
 export class NetworkDescriptionDto {
   id: number;
@@ -122,7 +122,7 @@ export class DistributionDTo {
   description: string;
   amount: number;
 }
-export class BananaDistribution {
+export class DigichainDistribution {
   total: number;
   distribution: DistributionDTo[];
   createdAt?: any;
@@ -132,7 +132,7 @@ export class OverviewDto {
   // tvl: LockedValueDto[];
   volume: TradeVolumeDto[];
   protocolMetrics: ProtocolMetricsDto[];
-  bananaDistribution: DistributionDTo[];
+  digichainDistribution: DistributionDTo[];
 }
 
 export class Token {
@@ -283,8 +283,8 @@ interface HistoryDataDto {
   value?: number;
   amount?: number;
   price?: number;
-  amountBanana?: number;
-  amountGnana?: number;
+  amountDigichain?: number;
+  amountGdigi?: number;
 }
 export class AllHistoryTvlDto {
   pairs: {

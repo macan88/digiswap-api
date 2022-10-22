@@ -11,7 +11,7 @@ export class GeneralStatsNetwork {
   chainId: number;
 
   @Prop()
-  bananaPrice: number;
+  digichainPrice: number;
 
   @Prop()
   burntAmount: number;

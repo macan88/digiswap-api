@@ -45,7 +45,7 @@ export default () => ({
   tokenListUrl: process.env.TOKEN_LIST_URL,
   dualFarmsListUrl: process.env.DUAL_FARMS_LIST_URL,
   billListUrl: process.env.BILL_LIST_URL,
-  apeswapListUrl: process.env.APP_LISTS_CONFIG_URL,
+  digidexListUrl: process.env.APP_LISTS_CONFIG_URL,
   graphUrl: process.env.GRAPH_URL,
   polygonGraphUrl: process.env.POLYGON_GRAPH_URL,
   telosGraphUrl: process.env.TELOS_GRAPH_URL,
@@ -89,15 +89,15 @@ export default () => ({
     },
     contracts: {
       masterDigi: '0xAf1B22cBDbB502B2089885bcd230255f8B80243b',
-      digichain: '0x603c7f932ed1fc6575303d8fb018fdcbb0f39a95',
-      goldenBanana: '0x9407026d236deae22cc1f3c419a9e47cbfcfe9e5',
+      digichain: '0x4732A86106064577933552FCea993D30BEC950a5',
+      goldenDigichain: '0x9407026d236deae22cc1f3c419a9e47cbfcfe9e5',
       bnb: '0xbb4CdB9CBd36B01bD1cBaEBF2De08d9173bc095c',
-      bananaBusd: '0x7Bd46f6Da97312AC2DBD1749f82E202764C0B914',
-      bananaBnb: '0xF65C1C0478eFDe3c19b49EcBE7ACc57BB6B1D713',
+      digichainBusd: '0x7Bd46f6Da97312AC2DBD1749f82E202764C0B914',
+      digichainBnb: '0xF65C1C0478eFDe3c19b49EcBE7ACc57BB6B1D713',
       burn: '0x000000000000000000000000000000000000dead',
       mulltiCall: '0x67ADCB4dF3931b0C5Da724058ADC2174a9844412',
       auction: '0x80a01f81b92d21e39ff1276c4a81d25cb4dc4cdb',
-      gBananaTreasury: '0xec4b9d1fd8a3534e31fce1636c7479bcd29213ae',
+      gDigichainTreasury: '0xec4b9d1fd8a3534e31fce1636c7479bcd29213ae',
     },
     appNodes: [
       'https://data-seed-prebsc-2-s2.binance.org:8545',
@@ -105,7 +105,7 @@ export default () => ({
       'https://data-seed-prebsc-2-s2.binance.org:8545',
     ],
     iazoExposer: '0xe977E40f29f699F75db2A137Af0B3Db2152404b6',
-    apePriceGetter: '',
+    digiPriceGetter: '',
   },
   56: {
     lottery: {
@@ -115,14 +115,14 @@ export default () => ({
     },
     contracts: {
       masterDigi: '0x5c8D727b265DBAfaba67E050f2f739cAeEB4A6F9',
-      digichain: '0x603c7f932ed1fc6575303d8fb018fdcbb0f39a95',
-      goldenBanana: '0xddb3bd8645775f59496c821e4f55a7ea6a6dc299',
+      digichain: '0x4732A86106064577933552FCea993D30BEC950a5',
+      goldenDigichain: '0xddb3bd8645775f59496c821e4f55a7ea6a6dc299',
       bnb: '0xbb4cdb9cbd36b01bd1cbaebf2de08d9173bc095c',
-      bananaBusd: '0x7Bd46f6Da97312AC2DBD1749f82E202764C0B914',
-      bananaBnb: '0xF65C1C0478eFDe3c19b49EcBE7ACc57BB6B1D713',
+      digichainBusd: '0x7Bd46f6Da97312AC2DBD1749f82E202764C0B914',
+      digichainBnb: '0xF65C1C0478eFDe3c19b49EcBE7ACc57BB6B1D713',
       burn: '0x000000000000000000000000000000000000dead',
       mulltiCall: '0x38ce767d81de3940CFa5020B55af1A400ED4F657',
-      gBananaTreasury: '0xec4b9d1fd8a3534e31fce1636c7479bcd29213ae',
+      gDigichainTreasury: '0xec4b9d1fd8a3534e31fce1636c7479bcd29213ae',
       auction: '0xaeCB396Be7F19618Db4C44d8e2E8C908228515E9',
       pol: [
         '0x944694417A6cA0a70963D644A11d42C10e3af042',
@@ -136,7 +136,7 @@ export default () => ({
       billNft: '0xb0278e43dbd744327fe0d5d0aba4a77cbfc7fad8',
       billNftV2: '0x7fd203888661d1f0ae625ed599909f8f97698670',
     },
-    apePriceGetter: '0x5e545322b83626c745FE46144a15C00C94cBD803',
+    digiPriceGetter: '0x5e545322b83626c745FE46144a15C00C94cBD803',
     olaCompoundLens: '0x183019dc7a8f8f1456df735862761cccf2e23009',
     appNodes: [
       // 'https://rpc.ankr.com/erigonbsc',
@@ -205,7 +205,7 @@ export default () => ({
       '0xbb4cdb9cbd36b01bd1cbaebf2de08d9173bc095c',
       '0x2170ed0880ac9a755fd29b2688956bd959f933f8',
       '0xe9e7cea3dedca5984780bafc599bd69add087d56',
-      '0x603c7f932ed1fc6575303d8fb018fdcbb0f39a95',
+      '0x4732A86106064577933552FCea993D30BEC950a5',
       '0x55d398326f99059ff775485246999027b3197955',
     ],
     subgraph: {
@@ -215,7 +215,7 @@ export default () => ({
     operationalBalanceCurrency: [
       { address: 'BNB', mainToken: '0xbb4CdB9CBd36B01bD1cBaEBF2De08d9173bc095c' },
       {
-        address: '0x603c7f932ed1fc6575303d8fb018fdcbb0f39a95',
+        address: '0x4732A86106064577933552FCea993D30BEC950a5',
         mainToken: '0xbb4CdB9CBd36B01bD1cBaEBF2De08d9173bc095c',
       },
       {
@@ -269,7 +269,7 @@ export default () => ({
       operational: '0x71C0C1001520e1568e17836Cc8a19d0dbdB2BD5f',
       pol: ['0x60dc928548b92b681beba07fc2551c5e5967a8e6'],
     },
-    apePriceGetter: '0x05D6C73D7de6E02B3f57677f849843c03320681c',
+    digiPriceGetter: '0x05D6C73D7de6E02B3f57677f849843c03320681c',
     appNodes: [
       'https://polygon-rpc.com',
       //'https://rpc-mainnet.matic.network',
@@ -326,14 +326,14 @@ export default () => ({
       burn: '0x000000000000000000000000000000000000dead',
       billNftV2: '0x9084C442286E23617694101d5575bEA48C2cf621',
     },
-    apePriceGetter: '0x29392EFEd565c13a0901Aeb88e32bf58EEb8a067',
+    digiPriceGetter: '0x29392EFEd565c13a0901Aeb88e32bf58EEb8a067',
     appNodes: [
       'http://test1.us.telos.net:7000/evm',
       // 'https://data-seed-prebsc-2-s2.binance.org:8545',
       // 'https://data-seed-prebsc-2-s2.binance.org:8545',
     ],
     subgraph: {
-      blocks: 'https://telos.apeswapgraphs.com/subgraphs/name/ape-swap/telos-blocks',
+      blocks: 'https://telos.digidexgraphs.com/subgraphs/name/ape-swap/telos-blocks',
       principal: process.env.TELOS_GRAPH_URL,
     },
     abi: {

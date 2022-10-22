@@ -10,12 +10,12 @@ import { getContract, getCurrentBlock } from 'src/utils/lib/web3';
 import { getParameterCaseInsensitive, createLpPairName } from 'src/utils/helpers';
 import { multicall, multicallNetwork } from 'src/utils/lib/multicall';
 import {
-  gBananaTreasury,
+  gDigichainTreasury,
   masterDigiContractWeb,
-  bananaAddress,
-  goldenBananaAddress,
+  digichainAddress,
+  goldenDigichainAddress,
   masterDigiContractAddress,
-  getBananaPriceWithPoolList,
+  getDigichainPriceWithPoolList,
   getPoolPrices,
   getWalletStatsForPools,
   getWalletStatsForFarms,
@@ -30,7 +30,7 @@ import { Model } from 'mongoose';
 import { GeneralStats as GeneralStatsDB, GeneralStatsDocument } from './schema/generalStats.schema';
 import { SubgraphService } from './subgraph.service';
 import { Cron } from '@nestjs/schedule';
-import { BEP20_REWARD_DIGII_ABI } from './utils/abi/bep20RewardApeAbi';
+import { BEP20_REWARD_DIGI_ABI } from './utils/abi/bep20RewardDigiAbi';
 import { GeneralStatsChain } from 'src/interfaces/stats/generalStatsChain.dto';
 import { TvlStats, TvlStatsDocument } from './schema/tvlStats.schema';
 import { ChainConfigService } from 'src/config/chain.configuration.service';
@@ -234,9 +234,9 @@ export class StatsService {
           stakeToken: { name, address },
           rewardToken: {
             name: 'DIGICHAIN',
-            address: '0x603c7f932ed1fc6575303d8fb018fdcbb0f39a95',
+            address: '0x4732A86106064577933552FCea993D30BEC950a5',
           },
-          link: `https://digiswap.finance/digichain-farms?pid=${poolIndex}`,
+          link: `https://digidex.finance/digichain-farms?pid=${poolIndex}`,
         });
       });
 
@@ -251,7 +251,7 @@ export class StatsService {
           apr,
           stakeToken: { name, address: stakedTokenAddress },
           rewardToken: { name: rewardTokenSymbol, address: rewardTokenAddress },
-          link: `https://digiswap.finance/pools?id=${id}`,
+          link: `https://digidex.finance/pools?id=${id}`,
         });
       });
 
@@ -280,7 +280,7 @@ export class StatsService {
           marketAddress: marketContractAddress,
           apy,
           token: { name, address: tokenAddress },
-          link: 'https://lending.digiswap.finance',
+          link: 'https://lending.digidex.finance',
           supplyDistributionApyPercent,
           borrowDistributionApyPercent,
         });
@@ -301,7 +301,7 @@ export class StatsService {
 
   async getAllLendingMarketData(): Promise<LendingMarket[]> {
     try {
-      const { bananaPrice } = await this.findGeneralStats();
+      const { digichainPrice } = await this.findGeneralStats();
 
       const lendingData: LendingMarket[] = [];
 
@@ -348,7 +348,7 @@ export class StatsService {
           reserveFactorMantissa,
           incentiveSupplySpeed,
           incentiveBorrowSpeed,
-          bananaPrice,
+          digichainPrice,
         );
         const { supply, borrow, tokenPrice } = calculateSupplyAndBorrowAsset(
           underlyingPrice,
@@ -408,7 +408,7 @@ export class StatsService {
         address: string;
         price: number;
         decimals: number;
-      }[] = await fetchPrices(allTokens, 56, this.configService.getData<string>(`56.apePriceGetter`));
+      }[] = await fetchPrices(allTokens, 56, this.configService.getData<string>(`56.digiPriceGetter`));
       const callsBill = allBills.map((bill) => ({
         address: bill.contractAddress['56'],
         name: 'trueBillPrice',
@@ -448,7 +448,7 @@ export class StatsService {
           earnTokenName: earnToken.symbol,
           billAddress: contract['56'],
           discount,
-          link: 'https://digiswap.finance/treasury-bills',
+          link: 'https://digidex.finance/treasury-bills',
           billNftAddress: billNnftAddress['56'],
           inactive,
         });
@@ -509,7 +509,7 @@ export class StatsService {
         bscTvl,
         { burntAmount, totalSupply, circulatingSupply },
         prices,
-        { circulatingSupply: gnanaCirculatingSupply },
+        { circulatingSupply: gdigiCirculatingSupply },
         partnerCount,
       ] = await Promise.all([
         this.getLendingTvl(),
@@ -517,10 +517,10 @@ export class StatsService {
         this.subgraphService.getVolumeData(),
         this.getBurnAndSupply(),
         this.priceService.getTokenPrices(),
-        this.getGnanaSupply(),
+        this.getGdigiSupply(),
         this.getPartnerCount(),
       ]);
-      const priceUSD = prices[bananaAddress()].usd;
+      const priceUSD = prices[digichainAddress()].usd;
       const poolsTvlBsc = await this.getTvlBsc();
       const tvl: GeneralStatsChain = {
         tvl: polygonTvl.liquidity + bscTvl.liquidity + poolsTvlBsc + lendingTvl,
@@ -532,7 +532,7 @@ export class StatsService {
         totalSupply,
         circulatingSupply,
         marketCap: circulatingSupply * priceUSD,
-        gnanaCirculatingSupply,
+        gdigiCirculatingSupply,
         lendingTvl,
         partnerCount,
       };
@@ -569,11 +569,11 @@ export class StatsService {
 
   async getStatsForWallet(wallet): Promise<WalletStats> {
     try {
-      const bananaContract = getContract(ERC20_ABI, bananaAddress());
+      const digichainContract = getContract(ERC20_ABI, digichainAddress());
 
       let walletStats: WalletStats = {
         tvl: 0,
-        bananaPrice: 0,
+        digichainPrice: 0,
         aggregateApr: 0,
         aggregateAprPerDay: 0,
         aggregateAprPerWeek: 0,
@@ -582,22 +582,22 @@ export class StatsService {
         dollarsEarnedPerWeek: 0,
         dollarsEarnedPerMonth: 0,
         dollarsEarnedPerYear: 0,
-        bananasEarnedPerDay: 0,
-        bananasEarnedPerWeek: 0,
-        bananasEarnedPerMonth: 0,
-        bananasEarnedPerYear: 0,
-        bananasInWallet: 0,
+        digichainsEarnedPerDay: 0,
+        digichainsEarnedPerWeek: 0,
+        digichainsEarnedPerMonth: 0,
+        digichainsEarnedPerYear: 0,
+        digichainsInWallet: 0,
         pendingRewardUsd: 0,
-        pendingRewardBanana: 0,
+        pendingRewardDigichain: 0,
       };
 
-      const [poolPrices, bananasInWallet] = await Promise.all([
+      const [poolPrices, digichainsInWallet] = await Promise.all([
         this.getCalculateStats(),
-        this.getTokenBalanceOfAddress(bananaContract, wallet),
+        this.getTokenBalanceOfAddress(digichainContract, wallet),
       ]);
 
-      walletStats.bananaPrice = poolPrices.bananaPrice;
-      walletStats.bananasInWallet = bananasInWallet;
+      walletStats.digichainPrice = poolPrices.digichainPrice;
+      walletStats.digichainsInWallet = digichainsInWallet;
 
       walletStats = await this.calculateWalletStats(walletStats, poolPrices, wallet);
 
@@ -639,24 +639,24 @@ export class StatsService {
     ]);
 
     // If Digichain price not returned from Subgraph, calculating using pools
-    if (!prices[bananaAddress()]) {
-      prices[bananaAddress()] = {
-        usd: getBananaPriceWithPoolList(poolInfos, prices),
+    if (!prices[digichainAddress()]) {
+      prices[digichainAddress()] = {
+        usd: getDigichainPriceWithPoolList(poolInfos, prices),
       };
     }
 
-    // Set GoldenBanana Price = digichain price / 0.72
-    prices[goldenBananaAddress()] = {
-      usd: prices[bananaAddress()].usd / 0.72,
+    // Set GoldenDigichain Price = digichain price / 0.72
+    prices[goldenDigichainAddress()] = {
+      usd: prices[digichainAddress()].usd / 0.72,
     };
 
-    const priceUSD = prices[bananaAddress()].usd;
+    const priceUSD = prices[digichainAddress()].usd;
 
     const [tokens, { burntAmount, totalSupply, circulatingSupply }, { tvl, totalLiquidity, totalVolume }] =
       await Promise.all([this.getTokens(poolInfos), this.getBurnAndSupply(), this.getTvlStats()]);
 
     const poolPrices: GeneralStats = {
-      bananaPrice: priceUSD,
+      digichainPrice: priceUSD,
       tvl,
       poolsTvl: 0,
       totalLiquidity,
@@ -889,21 +889,21 @@ export class StatsService {
   }
 
   async getBurnAndSupply(chainId = +process.env.CHAIN_ID) {
-    const bananaAddress = this.configService.getData<string>(`${chainId}.contracts.digichain`);
+    const digichainAddress = this.configService.getData<string>(`${chainId}.contracts.digichain`);
     const [decimals, burned, supply] = await multicallNetwork(
       this.configService.getData<any>(`${chainId}.abi.erc20`),
       [
         {
-          address: bananaAddress,
+          address: digichainAddress,
           name: 'decimals',
         },
         {
-          address: bananaAddress,
+          address: digichainAddress,
           name: 'balanceOf',
           params: [this.configService.getData<string>(`${chainId}.contracts.burn`)],
         },
         {
-          address: bananaAddress,
+          address: digichainAddress,
           name: 'totalSupply',
         },
       ],
@@ -920,14 +920,14 @@ export class StatsService {
     };
   }
 
-  async getGnanaSupply() {
-    const gnanaContract = getContract(ERC20_ABI, goldenBananaAddress());
+  async getGdigiSupply() {
+    const gdigiContract = getContract(ERC20_ABI, goldenDigichainAddress());
 
-    const decimals = await gnanaContract.methods.decimals().call();
+    const decimals = await gdigiContract.methods.decimals().call();
 
     const [treasury, supply] = await Promise.all([
-      gnanaContract.methods.balanceOf(gBananaTreasury()).call(),
-      gnanaContract.methods.totalSupply().call(),
+      gdigiContract.methods.balanceOf(gDigichainTreasury()).call(),
+      gdigiContract.methods.totalSupply().call(),
     ]);
 
     const treasuryAmount = treasury / 10 ** decimals;
@@ -1193,30 +1193,30 @@ export class StatsService {
 
     walletStats.pools.forEach((pool) => {
       walletStats.pendingRewardUsd += pool.pendingRewardUsd;
-      walletStats.pendingRewardBanana += pool.pendingReward;
+      walletStats.pendingRewardDigichain += pool.pendingReward;
       walletStats.dollarsEarnedPerDay += pool.dollarsEarnedPerDay;
       walletStats.dollarsEarnedPerWeek += pool.dollarsEarnedPerWeek;
       walletStats.dollarsEarnedPerMonth += pool.dollarsEarnedPerMonth;
       walletStats.dollarsEarnedPerYear += pool.dollarsEarnedPerYear;
-      walletStats.bananasEarnedPerDay += pool.tokensEarnedPerDay;
-      walletStats.bananasEarnedPerWeek += pool.tokensEarnedPerWeek;
-      walletStats.bananasEarnedPerMonth += pool.tokensEarnedPerMonth;
-      walletStats.bananasEarnedPerYear += pool.tokensEarnedPerYear;
+      walletStats.digichainsEarnedPerDay += pool.tokensEarnedPerDay;
+      walletStats.digichainsEarnedPerWeek += pool.tokensEarnedPerWeek;
+      walletStats.digichainsEarnedPerMonth += pool.tokensEarnedPerMonth;
+      walletStats.digichainsEarnedPerYear += pool.tokensEarnedPerYear;
       walletStats.tvl += pool.stakedTvl;
       totalApr += pool.stakedTvl * pool.apr;
     });
 
     walletStats.farms.forEach((farm) => {
       walletStats.pendingRewardUsd += farm.pendingRewardUsd;
-      walletStats.pendingRewardBanana += farm.pendingReward;
+      walletStats.pendingRewardDigichain += farm.pendingReward;
       walletStats.dollarsEarnedPerDay += farm.dollarsEarnedPerDay;
       walletStats.dollarsEarnedPerWeek += farm.dollarsEarnedPerWeek;
       walletStats.dollarsEarnedPerMonth += farm.dollarsEarnedPerMonth;
       walletStats.dollarsEarnedPerYear += farm.dollarsEarnedPerYear;
-      walletStats.bananasEarnedPerDay += farm.tokensEarnedPerDay;
-      walletStats.bananasEarnedPerWeek += farm.tokensEarnedPerWeek;
-      walletStats.bananasEarnedPerMonth += farm.tokensEarnedPerMonth;
-      walletStats.bananasEarnedPerYear += farm.tokensEarnedPerYear;
+      walletStats.digichainsEarnedPerDay += farm.tokensEarnedPerDay;
+      walletStats.digichainsEarnedPerWeek += farm.tokensEarnedPerWeek;
+      walletStats.digichainsEarnedPerMonth += farm.tokensEarnedPerMonth;
+      walletStats.digichainsEarnedPerYear += farm.tokensEarnedPerYear;
       walletStats.tvl += farm.stakedTvl;
       totalApr += farm.stakedTvl * farm.apr;
     });

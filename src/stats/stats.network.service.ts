@@ -110,7 +110,7 @@ export class StatsNetworkService {
       const priceUSD = prices[this.configService.getData<string>(`${chainId}.contracts.digichain`)].usd;
       const generalStats: GeneralStatsNetworkDto = {
         chainId,
-        bananaPrice: priceUSD,
+        digichainPrice: priceUSD,
         burntAmount,
         totalSupply,
         circulatingSupply,
@@ -128,12 +128,12 @@ export class StatsNetworkService {
           generalStats.lendingData = await this.statsService.getAllLendingMarketData();
           generalStats.bills = await this.statsService.getAllBillsData();
 
-          const [{ circulatingSupply: gnanaCirculatingSupply }] = await Promise.all([
-            this.statsService.getGnanaSupply(),
+          const [{ circulatingSupply: gdigiCirculatingSupply }] = await Promise.all([
+            this.statsService.getGdigiSupply(),
             this.calculatePoolsAndFarms(generalStats, prices, chainId),
           ]);
 
-          generalStats.gnanaCirculatingSupply = gnanaCirculatingSupply;
+          generalStats.gdigiCirculatingSupply = gdigiCirculatingSupply;
 
           try {
             await Promise.all([

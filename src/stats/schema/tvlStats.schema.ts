@@ -33,7 +33,7 @@ export class TvlStats {
   marketCap: number;
 
   @Prop({ required: true })
-  gnanaCirculatingSupply: number;
+  gdigiCirculatingSupply: number;
 
   @Prop({ required: true })
   lendingTvl: number;

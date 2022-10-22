@@ -2,7 +2,7 @@ import { LiteStats } from './liteStats.dto';
 
 export interface WalletStats {
   tvl: number;
-  bananaPrice: number;
+  digichainPrice: number;
   aggregateApr: number;
   aggregateAprPerDay: number;
   aggregateAprPerWeek: number;
@@ -11,15 +11,15 @@ export interface WalletStats {
   dollarsEarnedPerWeek: number;
   dollarsEarnedPerMonth: number;
   dollarsEarnedPerYear: number;
-  bananasEarnedPerDay: number;
-  bananasEarnedPerWeek: number;
-  bananasEarnedPerMonth: number;
-  bananasEarnedPerYear: number;
-  bananasInWallet: number;
+  digichainsEarnedPerDay: number;
+  digichainsEarnedPerWeek: number;
+  digichainsEarnedPerMonth: number;
+  digichainsEarnedPerYear: number;
+  digichainsInWallet: number;
   pendingReward?: number;
   pools?: LiteStats[];
   farms?: LiteStats[];
   incentivizedPools?: LiteStats[];
   pendingRewardUsd: number;
-  pendingRewardBanana: number;
+  pendingRewardDigichain: number;
 }

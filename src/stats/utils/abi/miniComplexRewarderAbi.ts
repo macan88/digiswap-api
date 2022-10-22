@@ -100,7 +100,7 @@ export const MINI_COMPLEX_REWARDER_ABI = [
       {
         indexed: false,
         internalType: 'uint256',
-        name: 'accBananaPerShare',
+        name: 'accDigichainPerShare',
         type: 'uint256',
       },
     ],
@@ -180,7 +180,7 @@ export const MINI_COMPLEX_REWARDER_ABI = [
       { internalType: 'uint256', name: '', type: 'uint256' },
       { internalType: 'uint256', name: 'lpToken', type: 'uint256' },
     ],
-    name: 'onBananaReward',
+    name: 'onDigichainReward',
     outputs: [],
     stateMutability: 'nonpayable',
     type: 'function',
@@ -238,7 +238,7 @@ export const MINI_COMPLEX_REWARDER_ABI = [
     inputs: [{ internalType: 'uint256', name: '', type: 'uint256' }],
     name: 'poolInfo',
     outputs: [
-      { internalType: 'uint128', name: 'accBananaPerShare', type: 'uint128' },
+      { internalType: 'uint128', name: 'accDigichainPerShare', type: 'uint128' },
       { internalType: 'uint64', name: 'lastRewardTime', type: 'uint64' },
       { internalType: 'uint64', name: 'allocPoint', type: 'uint64' },
     ],
@@ -309,7 +309,7 @@ export const MINI_COMPLEX_REWARDER_ABI = [
         components: [
           {
             internalType: 'uint128',
-            name: 'accBananaPerShare',
+            name: 'accDigichainPerShare',
             type: 'uint128',
           },
           { internalType: 'uint64', name: 'lastRewardTime', type: 'uint64' },

@@ -10,7 +10,7 @@ import {
   queryPairInformation,
   queryPoolBalances,
   queryTokenInformation,
-  queryTreasuryGnana,
+  queryTreasuryGdigi,
   QUOTE_CURRENCY_BSC,
   queryAddressGeneralInformation,
   queryGetTokenPrice,
@@ -230,15 +230,15 @@ export class BitqueryService {
     }
   }
 
-  async getTreasuryGnana(address: string) {
+  async getTreasuryGdigi(address: string) {
     const {
       data: {
         ethereum: { address: info },
       },
-    } = await this.queryBitquery(queryTreasuryGnana(address));
+    } = await this.queryBitquery(queryTreasuryGdigi(address));
     const { attributes } = info[0].smartContract;
-    const circulatingSupply = attributes.find((i) => i.name === 'bananaReserves')?.value;
-    const reserve = attributes.find((i) => i.name === 'goldenBananaReserves')?.value;
+    const circulatingSupply = attributes.find((i) => i.name === 'digichainReserves')?.value;
+    const reserve = attributes.find((i) => i.name === 'goldenDigichainReserves')?.value;
     const supply = reserve + circulatingSupply;
 
     return { circulatingSupply, reserve, supply };

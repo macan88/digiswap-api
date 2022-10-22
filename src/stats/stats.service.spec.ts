@@ -31,7 +31,7 @@ describe('StatsService', () => {
 
   it('should get all stats', async () => {
     const objStats = {
-      bananaPrice: expect.any(Number),
+      digichainPrice: expect.any(Number),
       burntAmount: expect.any(Number),
       totalSupply: expect.any(Number),
       circulatingSupply: expect.any(Number),
@@ -107,7 +107,7 @@ describe('StatsService', () => {
   it('should get stats for wallet', async () => {
     const objWallet = {
       tvl: expect.any(Number),
-      bananaPrice: expect.any(Number),
+      digichainPrice: expect.any(Number),
       aggregateApr: expect.any(Number),
       aggregateAprPerDay: expect.any(Number),
       aggregateAprPerWeek: expect.any(Number),
@@ -116,13 +116,13 @@ describe('StatsService', () => {
       dollarsEarnedPerWeek: expect.any(Number),
       dollarsEarnedPerMonth: expect.any(Number),
       dollarsEarnedPerYear: expect.any(Number),
-      bananasEarnedPerDay: expect.any(Number),
-      bananasEarnedPerWeek: expect.any(Number),
-      bananasEarnedPerMonth: expect.any(Number),
-      bananasEarnedPerYear: expect.any(Number),
-      bananasInWallet: expect.any(Number),
+      digichainsEarnedPerDay: expect.any(Number),
+      digichainsEarnedPerWeek: expect.any(Number),
+      digichainsEarnedPerMonth: expect.any(Number),
+      digichainsEarnedPerYear: expect.any(Number),
+      digichainsInWallet: expect.any(Number),
       pendingRewardUsd: expect.any(Number),
-      pendingRewardBanana: expect.any(Number),
+      pendingRewardDigichain: expect.any(Number),
       pools: expect.any(Array),
       farms: expect.any(Array),
       incentivizedPools: expect.any(Array),

@@ -9,7 +9,7 @@ import {
   LockedValueDto,
   TradeVolumeDto,
   ProtocolMetricsDto,
-  BananaDistribution,
+  DigichainDistribution,
   RatioHistoryDto,
 } from './dto/dashboardData.dto';
 
@@ -57,9 +57,9 @@ export class DashboardController {
   }
 
   @Get('/overview/digichain-distribution')
-  async getOverviewBananaDistribution(): Promise<BananaDistribution> {
+  async getOverviewDigichainDistribution(): Promise<DigichainDistribution> {
     this.logger.debug(`Called GET /dashboard/overview/digichain-distribution`);
-    return await this.dashboardOverviewService.getOverviewBananaDistribution();
+    return await this.dashboardOverviewService.getOverviewDigichainDistribution();
   }
 
   @Get('/overview/mcap-tvl-ratio')

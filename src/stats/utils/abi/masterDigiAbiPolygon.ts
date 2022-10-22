@@ -3,7 +3,7 @@ export const MASTER_DIGI_ABI_POLYGON = [
     inputs: [
       {
         internalType: 'contract IERC20',
-        name: '_banana',
+        name: '_digichain',
         type: 'address',
       },
     ],
@@ -103,11 +103,11 @@ export const MASTER_DIGI_ABI_POLYGON = [
       {
         indexed: false,
         internalType: 'uint256',
-        name: 'bananaPerSecond',
+        name: 'digichainPerSecond',
         type: 'uint256',
       },
     ],
-    name: 'LogBananaPerSecond',
+    name: 'LogDigichainPerSecond',
     type: 'event',
   },
   {
@@ -196,7 +196,7 @@ export const MASTER_DIGI_ABI_POLYGON = [
       {
         indexed: false,
         internalType: 'uint256',
-        name: 'accBananaPerShare',
+        name: 'accDigichainPerShare',
         type: 'uint256',
       },
     ],
@@ -291,7 +291,7 @@ export const MASTER_DIGI_ABI_POLYGON = [
   },
   {
     inputs: [],
-    name: 'bananaPerSecond',
+    name: 'digichainPerSecond',
     outputs: [
       {
         internalType: 'uint256',
@@ -455,7 +455,7 @@ export const MASTER_DIGI_ABI_POLYGON = [
         type: 'address',
       },
     ],
-    name: 'pendingBanana',
+    name: 'pendingDigichain',
     outputs: [
       {
         internalType: 'uint256',
@@ -539,7 +539,7 @@ export const MASTER_DIGI_ABI_POLYGON = [
     outputs: [
       {
         internalType: 'uint128',
-        name: 'accBananaPerShare',
+        name: 'accDigichainPerShare',
         type: 'uint128',
       },
       {
@@ -620,11 +620,11 @@ export const MASTER_DIGI_ABI_POLYGON = [
     inputs: [
       {
         internalType: 'uint256',
-        name: '_bananaPerSecond',
+        name: '_digichainPerSecond',
         type: 'uint256',
       },
     ],
-    name: 'setBananaPerSecond',
+    name: 'setDigichainPerSecond',
     outputs: [],
     stateMutability: 'nonpayable',
     type: 'function',
@@ -679,7 +679,7 @@ export const MASTER_DIGI_ABI_POLYGON = [
         components: [
           {
             internalType: 'uint128',
-            name: 'accBananaPerShare',
+            name: 'accDigichainPerShare',
             type: 'uint128',
           },
           {

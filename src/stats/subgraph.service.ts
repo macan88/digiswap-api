@@ -84,14 +84,14 @@ export class SubgraphService {
     yesterday.setDate(yesterday.getDate() - 2);
     const yTimestamp = Math.round(yesterday.getTime() / 1000);
     const nowTimestamp = Math.round(new Date().getTime() / 1000);
-    const { apeswapDayDatas } = await this.getDayData({
+    const { digidexDayDatas } = await this.getDayData({
       first: 1000,
       skip: 0,
       startTimestamp: yTimestamp,
       endTimestamp: nowTimestamp,
       filter: FULL_INFO,
     });
-    return apeswapDayDatas[1] || apeswapDayDatas[0];
+    return digidexDayDatas[1] || digidexDayDatas[0];
   }
 
   async getPairSwapData(pair: string, startTime: number, endTime: number, first = 1000, skip = 0): Promise<any> {

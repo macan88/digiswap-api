@@ -8,7 +8,7 @@ export type GeneralStatsDocument = GeneralStats & Document;
 @Schema()
 export class GeneralStats {
   @Prop({ required: true })
-  bananaPrice: number;
+  digichainPrice: number;
 
   @Prop({ required: true })
   burntAmount: number;

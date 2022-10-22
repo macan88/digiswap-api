@@ -36,7 +36,7 @@ const fetchVaultCalls = (vault: any, chainId: number): Call[] => {
       params: [masterchef.address[chainId]],
     },
   ];
-  const bananaPoolCalls = [
+  const digichainPoolCalls = [
     // Digichain pool info
     {
       address: masterchef.address[chainId],
@@ -50,7 +50,7 @@ const fetchVaultCalls = (vault: any, chainId: number): Call[] => {
       params: [masterchef.address[chainId]],
     },
   ];
-  return [...masterchefCalls, ...calls, ...bananaPoolCalls];
+  return [...masterchefCalls, ...calls, ...digichainPoolCalls];
 };
 
 export default fetchVaultCalls;

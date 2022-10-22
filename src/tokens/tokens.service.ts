@@ -55,7 +55,7 @@ export class TokensService {
 
   async getTokenListInfo(): Promise<any> {
     const { data } = await this.httpService
-      .get('https://raw.githubusercontent.com/ApeSwapFinance/digiswap-token-lists/main/lists/digiswap.json')
+      .get('https://raw.githubusercontent.com/macan88/digidex-token-lists/main/lists/digidex.json')
       .toPromise();
 
     return data;
@@ -85,7 +85,7 @@ export class TokensService {
 
   async refreshTelos(): Promise<string> {
     const { data } = await this.httpService
-      .get('https://digiswap-strapi.herokuapp.com/home-v-2-token-lists-by-chain-ids')
+      .get('https://digidex-strapi.herokuapp.com/home-v-2-token-lists-by-chain-ids')
       .toPromise();
 
     const DateOne = new Date(Date.now() - 24 * 60 * 60 * 1000);
@@ -191,7 +191,7 @@ export class TokensService {
     this.logger.log('Attempting to refresh token lists...');
     try {
       const { data } = await this.httpService
-        .get('https://digiswap-strapi.herokuapp.com/home-v-2-token-lists-by-chain-ids')
+        .get('https://digidex-strapi.herokuapp.com/home-v-2-token-lists-by-chain-ids')
         .toPromise();
 
       await this.processTokensFromSubgraphData(56, data[0].tokens['56']);

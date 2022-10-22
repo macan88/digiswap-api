@@ -8,7 +8,7 @@ import { PoolStats } from './pool.dto';
 import { TreasuryBill } from './treasuryBill.dto';
 
 export class GeneralStats {
-  readonly bananaPrice: number;
+  readonly digichainPrice: number;
   readonly burntAmount: number;
   readonly totalSupply: number;
   readonly circulatingSupply: number;
@@ -29,12 +29,12 @@ export class GeneralStats {
 
 export class GeneralStatsNetworkDto {
   readonly chainId: number;
-  bananaPrice: number;
+  digichainPrice: number;
   readonly burntAmount: number;
   readonly totalSupply: number;
   readonly circulatingSupply: number;
   readonly marketCap: number;
-  gnanaCirculatingSupply?: number;
+  gdigiCirculatingSupply?: number;
   poolsTvl: number;
 
   @ApiHideProperty()

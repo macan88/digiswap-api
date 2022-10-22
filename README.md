@@ -30,4 +30,4 @@ If you're planning to put in a PR for this backend API, please make sure you've 
 
 ### Learn More About DigiDex
 
-Interested in learning more about ApeSwap.Finance? Head over to our [official documentation](https://digichain.gitbook.io/digiswap-finance/welcome/master)
+Interested in learning more about DigiDex.Finance? Head over to our [official documentation](https://digichain.gitbook.io/welcome/master)

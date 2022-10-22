@@ -11,7 +11,7 @@ export function calculateSupplyAndBorrowApys(
   reserveFactorMantissa,
   incentiveSupplySpeed,
   incentiveBorrowSpeed,
-  bananaPrice,
+  digichainPrice,
 ): {
   borrowApyPercent: number;
   supplyApyPercent: number;
@@ -66,11 +66,11 @@ export function calculateSupplyAndBorrowApys(
   const totalBorrowBalanceUsd = totalBorrowedInUnits * underlyingUsdPrice;
 
   const incentiveSupplyPerYear = incentiveSupplySpeedUnits * BlockPerYear;
-  const incentiveSupplyPerYearUsd = incentiveSupplyPerYear * bananaPrice;
+  const incentiveSupplyPerYearUsd = incentiveSupplyPerYear * digichainPrice;
   const supplyDistributionApyPercent = (incentiveSupplyPerYearUsd * 100) / totalSupplyBalanceUsd;
 
   const incentiveBorrowPerYear = incentiveBorrowSpeedUnits * BlockPerYear;
-  const incentiveBorrowPerYearUsd = incentiveBorrowPerYear * bananaPrice;
+  const incentiveBorrowPerYearUsd = incentiveBorrowPerYear * digichainPrice;
   const borrowDistributionApyPercent = (incentiveBorrowPerYearUsd * 100) / totalBorrowBalanceUsd;
 
   return {

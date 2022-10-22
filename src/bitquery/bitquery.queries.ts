@@ -178,7 +178,7 @@ export function queryCandleData(
             baseCurrency: {is: "${baseCurrency}"}
             quoteCurrency: {is: "${quoteCurrency}"}
             tradeAmountUsd: {gt: ${minTrade}}
-            exchangeName: {is: "ApeSwap"}
+            exchangeName: {is: "DigiDex"}
           ) {
             timeInterval {
               minute(count: ${window}, format: "%Y-%m-%dT%H:%M:%SZ")
@@ -203,7 +203,7 @@ export function queryCandleData(
       }`;
 }
 
-export function queryTreasuryGnana(address: string) {
+export function queryTreasuryGdigi(address: string) {
   return `{
     ethereum(network: bsc) {
       address(address: {is: "${address}"}) {

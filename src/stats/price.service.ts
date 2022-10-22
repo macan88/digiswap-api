@@ -5,7 +5,7 @@ import { Token } from 'src/dashboard/dto/dashboardData.dto';
 import { PricesMap } from 'src/interfaces/stats/misc.dto';
 import { SubgraphService } from './subgraph.service';
 import { fetchPrices } from './utils/fetchPrices';
-import { goldenBananaAddress } from './utils/stats.utils';
+import { goldenDigichainAddress } from './utils/stats.utils';
 
 @Injectable()
 export class PriceService {
@@ -40,7 +40,7 @@ export class PriceService {
     if (filter.length !== 0) {
       tokens = filter.map((d) => tokens.find((h: any) => h.address.toLowerCase() === d.toLowerCase()));
     }
-    const data = await fetchPrices(tokens, chainId, this.configService.getData<string>(`${chainId}.apePriceGetter`));
+    const data = await fetchPrices(tokens, chainId, this.configService.getData<string>(`${chainId}.digiPriceGetter`));
     for (let i = 0; i < data.length; i++) {
       prices[data[i].address] = {
         usd: data[i].price,
@@ -48,7 +48,7 @@ export class PriceService {
       };
     }
     if (chainId === this.configService.getData<number>('networksId.BSC')) {
-      prices[goldenBananaAddress()] = {
+      prices[goldenDigichainAddress()] = {
         usd: prices[this.configService.getData<string>(`${chainId}.contracts.digichain`)].usd / 0.72,
       };
     }
@@ -58,7 +58,7 @@ export class PriceService {
   async getPricesByTokens(tokens: Token[], chainId: number): Promise<any> {
     const prices = {};
 
-    const data = await fetchPrices(tokens, chainId, this.configService.getData<string>(`${chainId}.apePriceGetter`));
+    const data = await fetchPrices(tokens, chainId, this.configService.getData<string>(`${chainId}.digiPriceGetter`));
     for (let i = 0; i < data.length; i++) {
       prices[data[i].address] = {
         usd: data[i].price,

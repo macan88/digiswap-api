@@ -1,6 +1,6 @@
 import { Injectable, Logger } from '@nestjs/common';
 import {
-  BananaDistribution,
+  DigichainDistribution,
   DistributionDescriptions,
   DistributionDTo,
   LockedValueDto,
@@ -95,7 +95,7 @@ export class DashboardOverviewService {
       const volumeData = volumeDataList[index];
       info.push({
         description,
-        history: [...(volumeData ? volumeData.history : []), ...(data?.apeswapDayDatas ? data.apeswapDayDatas : [])],
+        history: [...(volumeData ? volumeData.history : []), ...(data?.digidexDayDatas ? data.digidexDayDatas : [])],
       });
     });
     info.sort((a, b) => {
@@ -205,49 +205,49 @@ export class DashboardOverviewService {
     await this.dashboardService.createOrUpdateDashboardData({ 'protocol.burned': protocolBurned });
     await this.dashboardService.createOrUpdateDashboardData({ 'protocol.minted': protocolMinted });
   }
-  async getOverviewBananaDistribution(): Promise<BananaDistribution> {
+  async getOverviewDigichainDistribution(): Promise<DigichainDistribution> {
     const info = await this.dashboardService.verifyDashboardData('distribution');
     if (info) return info.distribution;
     await this.dashboardService.createOrUpdateDashboardData({ 'distribution.createdAt': new Date() });
-    this.calculateOverviewBananaDistribution();
+    this.calculateOverviewDigichainDistribution();
     const dashboard = await this.dashboardService.findDashboardData();
     delete dashboard.distribution.createdAt;
     return dashboard.distribution;
   }
-  async calculateOverviewBananaDistribution() {
+  async calculateOverviewDigichainDistribution() {
     this.logger.log('Attemping to calculate Digichain Distribution Data...');
     const dashboard = await this.dashboardService.findDashboardData();
     const { burnedData, mintedData } = getLastMarketCapAndBurnData(dashboard.protocol);
     const stats = await this.statsService.findTvlStats();
     const burnTotal = burnedData.length > 0 ? burnedData[burnedData.length - 1].amount : stats.burntAmount;
     const mintedTotal = mintedData.length > 0 ? mintedData[mintedData.length - 1].amount : stats.totalSupply;
-    const bananaDistribution: BananaDistribution = {
+    const digichainDistribution: DigichainDistribution = {
       total: mintedTotal,
       distribution: [],
     };
-    bananaDistribution.distribution.push({
+    digichainDistribution.distribution.push({
       description: DistributionDescriptions.burn,
       amount: burnTotal,
     });
-    const gnanaSupply = stats.gnanaCirculatingSupply;
-    bananaDistribution.distribution.push({
+    const gdigiSupply = stats.gdigiCirculatingSupply;
+    digichainDistribution.distribution.push({
       description: DistributionDescriptions.gdigi,
-      amount: gnanaSupply,
+      amount: gdigiSupply,
     });
     const poolDistribution = await this.calculatePoolDistribution(
-      bananaDistribution.distribution,
+      digichainDistribution.distribution,
       dashboard.distribution.distribution,
     );
     const totalLiquidity = await this.calculateLiquidityDistribution(
-      bananaDistribution.distribution,
+      digichainDistribution.distribution,
       dashboard.distribution.distribution,
     );
-    bananaDistribution.distribution.push({
+    digichainDistribution.distribution.push({
       description: DistributionDescriptions.other,
-      amount: mintedTotal - (burnTotal + gnanaSupply + poolDistribution + totalLiquidity),
+      amount: mintedTotal - (burnTotal + gdigiSupply + poolDistribution + totalLiquidity),
     });
-    bananaDistribution.createdAt = new Date();
-    await this.dashboardService.createOrUpdateDashboardData({ distribution: bananaDistribution });
+    digichainDistribution.createdAt = new Date();
+    await this.dashboardService.createOrUpdateDashboardData({ distribution: digichainDistribution });
     this.logger.log('Successfully generated Digichain Distribution Data.');
   }
 
@@ -259,7 +259,7 @@ export class DashboardOverviewService {
     try {
       const infoLPBalances = await this.bitqueryService.getAddressGeneralInformation(
         'bsc',
-        [this.config.get<string>('56.contracts.bananaBusd'), this.config.get<string>('56.contracts.bananaBnb')],
+        [this.config.get<string>('56.contracts.digichainBusd'), this.config.get<string>('56.contracts.digichainBnb')],
         [
           this.config.get<string>('56.contracts.digichain'),
           this.config.get<string>('56.contracts.bnb'),

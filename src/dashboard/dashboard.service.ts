@@ -251,7 +251,7 @@ export class DashboardService {
           mappingLPTreasury.map((address: string) => {
             const type =
               LPTreasury.find((lp) => lp.lpToken.address[chainId].toLowerCase() === address).billType.toLowerCase() ===
-              MiscDescriptions.bananaBill
+              MiscDescriptions.digichainBill
                 ? MiscDescriptions.digiswap
                 : MiscDescriptions.partner;
             data.lpTokens.push({ address, chainId, location: LocationDescription.pol, type });
@@ -680,7 +680,7 @@ export class DashboardService {
     return filter;
   }
   async getVaultsList(): Promise<Vault[]> {
-    const { data } = await this.httpService.get(`${this.config.get<string>('apeswapListUrl')}/vaults.json`).toPromise();
+    const { data } = await this.httpService.get(`${this.config.get<string>('digidexListUrl')}/vaults.json`).toPromise();
     return data;
   }
   async calculateLendingMarketData(data: TreasuryDto) {

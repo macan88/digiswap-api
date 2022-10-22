@@ -2,13 +2,13 @@ export const MASTER_DIGI_ABI = [
   {
     inputs: [
       {
-        internalType: 'contract BananaToken',
-        name: '_banana',
+        internalType: 'contract DigichainToken',
+        name: '_digichain',
         type: 'address',
       },
       {
-        internalType: 'contract BananaSplitBar',
-        name: '_bananaSplit',
+        internalType: 'contract DigichainSplitBar',
+        name: '_digichainSplit',
         type: 'address',
       },
       {
@@ -18,7 +18,7 @@ export const MASTER_DIGI_ABI = [
       },
       {
         internalType: 'uint256',
-        name: '_bananaPerBlock',
+        name: '_digichainPerBlock',
         type: 'uint256',
       },
       {
@@ -170,7 +170,7 @@ export const MASTER_DIGI_ABI = [
     name: 'cake',
     outputs: [
       {
-        internalType: 'contract BananaToken',
+        internalType: 'contract DigichainToken',
         name: '',
         type: 'address',
       },
@@ -484,7 +484,7 @@ export const MASTER_DIGI_ABI = [
     name: 'syrup',
     outputs: [
       {
-        internalType: 'contract BananaSplitBar',
+        internalType: 'contract DigichainSplitBar',
         name: '',
         type: 'address',
       },
