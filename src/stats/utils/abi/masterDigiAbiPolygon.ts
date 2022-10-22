@@ -693,7 +693,7 @@ export const MASTER_DIGI_ABI_POLYGON = [
             type: 'uint64',
           },
         ],
-        internalType: 'struct MiniApeV2.PoolInfo',
+        internalType: 'struct MiniDigiV2.PoolInfo',
         name: 'pool',
         type: 'tuple',
       },

@@ -13,7 +13,7 @@ import {
   ChainIdDto,
   GeneralStats,
   GeneralStatsNetworkDto,
-  ApeLpApr,
+  DigiLpApr,
   HomepageFeatures,
 } from 'src/interfaces/stats/generalStats.dto';
 import { GeneralStatsChain } from 'src/interfaces/stats/generalStatsChain.dto';
@@ -78,7 +78,7 @@ export class StatsController {
 
   @Throttle(700, 60)
   @Get('/network/lpAprs/:chainId')
-  async getLpAprs(@Param() chainIdDto: ChainIdDto): Promise<ApeLpApr> {
+  async getLpAprs(@Param() chainIdDto: ChainIdDto): Promise<DigiLpApr> {
     this.logger.debug('Called GET /stats/network/lpAprs/:chainId');
     return await this.statsNetworkService.getLpAprs(+chainIdDto.chainId);
   }

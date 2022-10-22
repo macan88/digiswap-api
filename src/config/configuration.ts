@@ -333,7 +333,7 @@ export default () => ({
       // 'https://data-seed-prebsc-2-s2.binance.org:8545',
     ],
     subgraph: {
-      blocks: 'https://telos.digidexgraphs.com/subgraphs/name/ape-swap/telos-blocks',
+      blocks: 'https://telos.digidexgraphs.com/subgraphs/name/digi-swap/telos-blocks',
       principal: process.env.TELOS_GRAPH_URL,
     },
     abi: {

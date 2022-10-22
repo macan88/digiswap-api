@@ -340,7 +340,7 @@ export class DashboardHistoryHelperService {
                 contracts: {},
                 tokens: {},
                 value: 0,
-                apeValue: 0,
+                digiValue: 0,
                 partnerValue: 0,
               };
             }
@@ -384,7 +384,7 @@ export class DashboardHistoryHelperService {
                       ? MiscDescriptions.digiswap
                       : MiscDescriptions.partner;
                   if (type === MiscDescriptions.digiswap) {
-                    data[formatLastTime].apeValue += amount * priceLP;
+                    data[formatLastTime].digiValue += amount * priceLP;
                   } else {
                     data[formatLastTime].partnerValue += amount * priceLP;
                   }

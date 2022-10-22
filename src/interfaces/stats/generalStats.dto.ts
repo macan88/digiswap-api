@@ -55,7 +55,7 @@ class LpApr {
   lpApr: number;
 }
 
-export class ApeLpApr {
+export class DigiLpApr {
   chainId: number;
   lpAprs: LpApr[];
 }

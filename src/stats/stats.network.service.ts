@@ -1,6 +1,6 @@
 import { Injectable, HttpService, Inject, CACHE_MANAGER, Logger, BadRequestException } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
-import { GeneralStatsNetworkDto, ApeLpApr } from 'src/interfaces/stats/generalStats.dto';
+import { GeneralStatsNetworkDto, DigiLpApr } from 'src/interfaces/stats/generalStats.dto';
 import { Cache } from 'cache-manager';
 import { PriceService } from './price.service';
 import {
@@ -360,7 +360,7 @@ export class StatsNetworkService {
     });
   }
 
-  async getLpAprs(chainId: number): Promise<ApeLpApr> {
+  async getLpAprs(chainId: number): Promise<DigiLpApr> {
     try {
       const networkStatsData = await this.getCalculateStatsNetwork(chainId);
 

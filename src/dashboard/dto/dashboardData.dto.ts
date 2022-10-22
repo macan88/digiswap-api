@@ -54,7 +54,7 @@ export class HistoryTreasury {
   timestamp: number;
   polValue: number;
   oppFundValue: number;
-  apePolValue: number;
+  digiPolValue: number;
   partnerPolValue: number;
 }
 export class AllHistoryTreasuryDto {
@@ -70,7 +70,7 @@ export class HistoryDto {
 export class TreasuryDto {
   value: number;
   valuePol: number;
-  valueApePol: number;
+  valueDigiPol: number;
   valuePartnerPol: number;
   valueOperational: number;
   lpTokens: TreasuryLPDto[];
@@ -322,6 +322,6 @@ export class RatioHistoryDto {
 export class HistoryInformationDto {
   lastDate: string;
   value: number;
-  apeValue: number;
+  aValue: number;
   partnerValue: number;
 }

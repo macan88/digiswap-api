@@ -62,7 +62,7 @@ export class DashboardService {
         valueOperational: 0,
         valuePol: 0,
         tokens: [],
-        valueApePol: 0,
+        valueDigiPol: 0,
         valuePartnerPol: 0,
       };
 
@@ -88,7 +88,7 @@ export class DashboardService {
   }
 
   async mappingHistoryPol(data: TreasuryDto) {
-    const { valuePol, valueApePol, valuePartnerPol } = data;
+    const { valuePol, valueDigiPol, valuePartnerPol } = data;
     const dashboard = await this.findDashboardData();
     const pol = dashboard.historyTreasury?.pol;
     const last: string = pol ? Object.keys(pol)[Object.keys(pol).length - 1] : '';
@@ -97,13 +97,13 @@ export class DashboardService {
       dashboard.historyTreasury.pol[formatLastTime] = {
         lastDate: formatLastTime,
         value: valuePol,
-        apeValue: valueApePol,
+        digiValue: valueDigiPol,
         partnerValue: valuePartnerPol,
       };
     }
     if (last !== '' && dashboard.historyTreasury?.pol[formatLastTime]) {
       dashboard.historyTreasury.pol[formatLastTime].value = valuePol;
-      dashboard.historyTreasury.pol[formatLastTime].apeValue = valueApePol;
+      dashboard.historyTreasury.pol[formatLastTime].digiValue = valueDigiPol;
       dashboard.historyTreasury.pol[formatLastTime].partnerValue = valuePartnerPol;
       await this.createOrUpdateDashboardData({ 'historyTreasury.pol': dashboard.historyTreasury.pol });
     }
@@ -114,7 +114,7 @@ export class DashboardService {
       return {
         time: date.getTime() / 1000,
         amount: f.value,
-        apeValue: f.apeValue,
+        digiValue: f.digiValue,
         partnerValue: f.partnerValue,
       };
     });
@@ -137,7 +137,7 @@ export class DashboardService {
     uniqueDates.map((time: string) => {
       const date = new Date(time);
       const polValue = pol[time]?.value ?? 0;
-      const apePolValue = pol[time]?.apeValue ?? 0;
+      const digipolValue = pol[time]?.digiValue ?? 0;
       const partnerPolValue = pol[time]?.partnerValue ?? 0;
       const oppFundValue = operational[time]?.value ?? 0;
       if (polValue > 0 && oppFundValue > 0) {
@@ -145,7 +145,7 @@ export class DashboardService {
           timestamp: date.getTime() / 1000,
           oppFundValue,
           polValue,
-          apePolValue,
+          digipolValue,
           partnerPolValue,
         });
       }
@@ -229,7 +229,7 @@ export class DashboardService {
 
   async calculatePol(data: TreasuryDto) {
     const LPTreasury = await this.getLPTreasury();
-    let apeValue = 0,
+    let digiValue = 0,
       partnerValue = 0;
     await Promise.all(
       Object.values(this.NETWORKS).map(async ({ id: chainId, chain }) => {
@@ -289,11 +289,11 @@ export class DashboardService {
             const lpValue = +token0Price + +token1Price;
             data.valuePol += lpValue;
             if (lp.type === MiscDescriptions.digiswap) {
-              apeValue += lpValue;
+              digiValue += lpValue;
             } else {
               partnerValue += lpValue;
             }
-            data.valueApePol = apeValue;
+            data.valueDigiPol = digiValue;
             data.valuePartnerPol = partnerValue;
             lp.value = lpValue;
             lp.amount = lpSupply;
