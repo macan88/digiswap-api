@@ -1,0 +1,270 @@
+{
+  "tvl": [
+    {
+      "description": "farms",
+      "amount": 123000
+    },
+    {
+      "description": "pools",
+      "amount": 123000
+    },
+    {
+      "description": "jungle farms",
+      "amount": 123000
+    },
+    {
+      "description": "lending",
+      "amount": 123000
+    },
+    {
+      "description": "maximizers",
+      "amount": 123000
+    }
+  ],
+  "volume": [
+    {
+      "description": "BNB Chain",
+      "history": [
+        {
+          "amount": 1000,
+          "time": 1650149896
+        },
+        {
+          "amount": 3000,
+          "time": 1651149896
+        },
+        {
+          "amount": 6000,
+          "time": 1652149896
+        },
+        {
+          "amount": 12000,
+          "time": 1653149896
+        },
+        {
+          "amount": 50000,
+          "time": 1654149896
+        }
+      ]
+    },
+    {
+      "description": "Polygon",
+      "history": [
+        {
+          "amount": 1000,
+          "time": 1650149896
+        },
+        {
+          "amount": 3000,
+          "time": 1651149896
+        },
+        {
+          "amount": 6000,
+          "time": 1652149896
+        },
+        {
+          "amount": 12000,
+          "time": 1653149896
+        },
+        {
+          "amount": 50000,
+          "time": 1654149896
+        }
+      ]
+    },
+    {
+      "description": "ETH",
+      "history": [
+        {
+          "amount": 1000,
+          "time": 1650149896
+        },
+        {
+          "amount": 3000,
+          "time": 1651149896
+        },
+        {
+          "amount": 6000,
+          "time": 1652149896
+        },
+        {
+          "amount": 12000,
+          "time": 1653149896
+        },
+        {
+          "amount": 50000,
+          "time": 1654149896
+        }
+      ]
+    }
+  ],
+  "protocolMetrics": [
+    {
+      "description": "Digichain Holders",
+      "amount": 100000,
+      "history": [
+        {
+          "amount": 1000,
+          "time": 1650149896
+        },
+        {
+          "amount": 3000,
+          "time": 1651149896
+        },
+        {
+          "amount": 6000,
+          "time": 1652149896
+        },
+        {
+          "amount": 12000,
+          "time": 1653149896
+        },
+        {
+          "amount": 50000,
+          "time": 1654149896
+        }
+      ]
+    },
+    {
+      "description": "Market Cap",
+      "amount": 500000,
+      "history": [
+        {
+          "amount": 1000,
+          "time": 1650149896
+        },
+        {
+          "amount": 3000,
+          "time": 1651149896
+        },
+        {
+          "amount": 6000,
+          "time": 1652149896
+        },
+        {
+          "amount": 12000,
+          "time": 1653149896
+        },
+        {
+          "amount": 50000,
+          "time": 1654149896
+        }
+      ]
+    },
+    {
+      "description": "Digichain Burned",
+      "amount": 1000000,
+      "history": [
+        {
+          "amount": 1000,
+          "time": 1650149896
+        },
+        {
+          "amount": 3000,
+          "time": 1651149896
+        },
+        {
+          "amount": 6000,
+          "time": 1652149896
+        },
+        {
+          "amount": 12000,
+          "time": 1653149896
+        },
+        {
+          "amount": 50000,
+          "time": 1654149896
+        }
+      ]
+    },
+    {
+      "description": "POL",
+      "amount": 800000,
+      "history": [
+        {
+          "amount": 1000,
+          "time": 1650149896
+        },
+        {
+          "amount": 3000,
+          "time": 1651149896
+        },
+        {
+          "amount": 6000,
+          "time": 1652149896
+        },
+        {
+          "amount": 12000,
+          "time": 1653149896
+        },
+        {
+          "amount": 50000,
+          "time": 1654149896
+        }
+      ]
+    }
+  ],
+  "bananaDistribution": {
+    "total": 105340500,
+    "distribution": [
+      {
+        "description": "Gdigi",
+        "amount": 123000
+      },
+      {
+        "description": "Burn Wallet",
+        "amount": 123000
+      },
+      {
+        "description": "Pools",
+        "amount": 123000
+      },
+      {
+        "description": "Liquidity",
+        "amount": 123000
+      }
+    ]
+  },
+  "history": [
+    {
+      "timestamp": 1648957851,
+      "polValue": 100,
+      "oppFundValue": 100
+    },
+    {
+      "timestamp": 1649967851,
+      "polValue": 1100,
+      "oppFundValue": 1100
+    },
+    {
+      "timestamp": 1650957851,
+      "polValue": 2100,
+      "oppFundValue": 2100
+    },
+    {
+      "timestamp": 1651957851,
+      "polValue": 4100,
+      "oppFundValue": 4100
+    },
+    {
+      "timestamp": 1652957851,
+      "polValue": 5100,
+      "oppFundValue": 5100
+    },
+    {
+      "timestamp": 1653957851,
+      "polValue": 4100,
+      "oppFundValue": 4100
+    },
+    {
+      "timestamp": 1654957851,
+      "polValue": 6100,
+      "oppFundValue": 6100
+    },
+    {
+      "timestamp": 1655957851,
+      "polValue": 7100,
+      "oppFundValue": 7100
+    }
+  ]
+}
