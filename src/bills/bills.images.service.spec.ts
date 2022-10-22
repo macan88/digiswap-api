@@ -14,7 +14,7 @@ const MockMetadata: BillMetadata = {
     },
     {
       trait_type: 'Payout Token',
-      value: '0x603c7f932ED1fc6575303D8Fb018fDCBb0f39a95',
+      value: '0x4732A86106064577933552FCea993D30BEC950a5',
     },
     {
       trait_type: 'Vesting Period',
@@ -60,21 +60,21 @@ const MockMetadata: BillMetadata = {
     billNftId: 18,
     expires: 1650096354,
     vestingPeriodSeconds: 1209600,
-    payoutToken: '0x603c7f932ED1fc6575303D8Fb018fDCBb0f39a95',
+    payoutToken: '0x4732A86106064577933552FCea993D30BEC950a5',
     principalToken: '0xF65C1C0478eFDe3c19b49EcBE7ACc57BB6B1D713',
     type: 'Digichain',
     pairName: '[DIGICHAIN]-[WBNB] LP',
     payoutTokenData: {
-      address: '0x603c7f932ED1fc6575303D8Fb018fDCBb0f39a95',
-      name: 'DigiDexFinance Digichain',
+      address: '0x4732A86106064577933552FCea993D30BEC950a5',
+      name: 'Digichain',
       symbol: 'DIGICHAIN',
-      decimals: 18,
+      decimals: 9,
     },
     token0: {
-      address: '0x603c7f932ED1fc6575303D8Fb018fDCBb0f39a95',
-      symbol: 'FLOKI',
-      name: 'DigiDexFinance Digichain',
-      decimals: 18,
+      address: '0x4732A86106064577933552FCea993D30BEC950a5',
+      symbol: 'DIGICHAIN',
+      name: 'Digichain',
+      decimals: 9,
     },
     token1: {
       address: '0xbb4CdB9CBd36B01bD1cBaEBF2De08d9173bc095c',

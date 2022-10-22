@@ -137,7 +137,7 @@ export class DashboardService {
     uniqueDates.map((time: string) => {
       const date = new Date(time);
       const polValue = pol[time]?.value ?? 0;
-      const digipolValue = pol[time]?.digiValue ?? 0;
+      const digiPolValue = pol[time]?.digiValue ?? 0;
       const partnerPolValue = pol[time]?.partnerValue ?? 0;
       const oppFundValue = operational[time]?.value ?? 0;
       if (polValue > 0 && oppFundValue > 0) {
@@ -145,7 +145,7 @@ export class DashboardService {
           timestamp: date.getTime() / 1000,
           oppFundValue,
           polValue,
-          digipolValue,
+          digiPolValue,
           partnerPolValue,
         });
       }
