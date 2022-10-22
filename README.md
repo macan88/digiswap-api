@@ -28,6 +28,6 @@ If you're planning to put in a PR for this backend API, please make sure you've 
 - Deployed to a remote development environment & tested
 
 
-### Learn More About ApeSwap
+### Learn More About DigiDex
 
 Interested in learning more about ApeSwap.Finance? Head over to our [official documentation](https://digichain.gitbook.io/digiswap-finance/welcome/master)
