@@ -1,6 +1,6 @@
-# 🍌 ApeSwap API
+# DigiDex API
 
-The `digiswap-api` repo is the primary API repository for [ApeSwap.Finance](https://digiswap.finance), which is a leading DeFi Hub on BNB Chain, Polygon, and Ethereum focused on offering a premier trading experience.
+The `digiswap-api` repo is the primary API repository for [digidex.Finance](https://digidex.finance), which is a leading DeFi Hub on BNB Chain
 
 ## Getting Started
 
@@ -12,7 +12,7 @@ Getting up and running with the `digiswap-api` repo is a super simple, 2 step pr
 To do this, open a terminal and run the following commands:
 
 ```
-git clone https://github.com/ApeSwapFinance/digiswap-api.git
+git clone https://github.com/macan88/digiswap-api.git
 cd digiswap-api
 npm i
 ```
@@ -30,15 +30,4 @@ If you're planning to put in a PR for this backend API, please make sure you've 
 
 ### Learn More About ApeSwap
 
-Interested in learning more about ApeSwap.Finance? Head over to our [official documentation](https://digiswap.gitbook.io/digiswap-finance/welcome/master) to read and learn more about our features, functionality, DAO, and ecosystem!
-
-Socials
-
-- 📰 Medium (Our Blog): https://ape-swap.medium.com
-- 🐦 Twitter: https://twitter.com/ape_swap
-- 💬 Telegram Main Group: https://t.me/ape_swap
-- 💬 Telegram Announcements: https://t.me/ape_swap_news
-- 🖥 GitHub: https://github.com/ApeSwapFinance
-- 🤳 Instagram: https://instagram.com/digiswap.finance
-- 🤩 Reddit: https://www.reddit.com/r/Digiswap/
-- 👾 Discord: https://discord.gg/ApeSwap
+Interested in learning more about ApeSwap.Finance? Head over to our [official documentation](https://digichain.gitbook.io/digiswap-finance/welcome/master)
