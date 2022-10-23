@@ -322,6 +322,6 @@ export class RatioHistoryDto {
 export class HistoryInformationDto {
   lastDate: string;
   value: number;
-  aValue: number;
+  digiValue: number;
   partnerValue: number;
 }
